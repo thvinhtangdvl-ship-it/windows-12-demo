@@ -3,47 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows 12 Demo</title>
+    <title>Windows Web Desktop</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Màn hình chính -->
+    <!-- MÀN HÌNH CHÍNH -->
     <div class="desktop">
-        <!-- Widget hoặc Icon trên Desktop -->
+        
+        <!-- Các Icon trên Desktop -->
         <div class="desktop-icons">
-            <div class="icon" onclick="openApp('setting')">⚙️ <span>Settings</span></div>
+            <div class="icon" onclick="openWindow('this-pc')">
+                <img src="https://win11.blueedge.me/img/icon/win/computer.png" alt="This PC">
+                <span>This PC</span>
+            </div>
+            <div class="icon" onclick="openWindow('notepad')">
+                <img src="https://win11.blueedge.me/img/icon/win/notepad.png" alt="Notepad">
+                <span>Notepad</span>
+            </div>
+            <div class="icon" onclick="openWindow('recycle')">
+                <img src="https://win11.blueedge.me/img/icon/win/trash.png" alt="Recycle Bin">
+                <span>Recycle Bin</span>
+            </div>
         </div>
 
-        <!-- Cửa sổ ứng dụng (Mặc định ẩn) -->
-        <div id="win-setting" class="window">
+        <!-- CỬA SỔ 1: THIS PC -->
+        <div id="win-this-pc" class="window">
             <div class="window-header">
-                <span>Settings</span>
-                <button onclick="closeApp('setting')">X</button>
+                <div class="title">📁 This PC</div>
+                <div class="controls">
+                    <span class="min">—</span>
+                    <span class="max">🗖</span>
+                    <span class="close" onclick="closeWindow('this-pc')">✕</span>
+                </div>
             </div>
             <div class="window-content">
-                <p>Chào mừng bạn đến với Cài đặt Windows 12!</p>
+                <div class="folder-grid">
+                    <div class="folder-item">📁 Desktop</div>
+                    <div class="folder-item">📁 Downloads</div>
+                    <div class="folder-item">📁 Documents</div>
+                    <div class="folder-item">💽 Local Disk (C:)</div>
+                </div>
             </div>
         </div>
+
+        <!-- CỬA SỔ 2: NOTEPAD -->
+        <div id="win-notepad" class="window">
+            <div class="window-header">
+                <div class="title">📝 Notepad</div>
+                <div class="controls">
+                    <span class="min">—</span>
+                    <span class="max">🗖</span>
+                    <span class="close" onclick="closeWindow('notepad')">✕</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <textarea placeholder="Nhập văn bản vào đây..."></textarea>
+            </div>
+        </div>
+
+        <!-- CỬA SỔ 3: RECYCLE BIN -->
+        <div id="win-recycle" class="window">
+            <div class="window-header">
+                <div class="title">🗑️ Recycle Bin</div>
+                <div class="controls">
+                    <span class="min">—</span>
+                    <span class="max">🗖</span>
+                    <span class="close" onclick="closeWindow('recycle')">✕</span>
+                </div>
+            </div>
+            <div class="window-content" style="padding: 20px; color: #555;">
+                Thư mục trống.
+            </div>
+        </div>
+
     </div>
 
-    <!-- Thanh Taskbar bo góc kiểu mới -->
+    <!-- THANH TASKBAR -->
     <div class="taskbar">
-        <div class="taskbar-center">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" class="start-btn" onclick="toggleStart()">
-            <div class="task-icon">🌐</div>
-            <div class="task-icon">📂</div>
+        <div class="taskbar-left">
+            <img src="https://win11.blueedge.me/img/icon/win/home.png" class="start-btn" onclick="toggleStartMenu()">
+            <img src="https://win11.blueedge.me/img/icon/win/search.png" class="task-icon">
+            <img src="https://win11.blueedge.me/img/icon/win/explorer.png" class="task-icon" onclick="openWindow('this-pc')">
+        </div>
+        
+        <!-- Đồng hồ góc phải -->
+        <div class="taskbar-right" id="clock">
+            00:00 AM
         </div>
     </div>
 
-    <!-- Menu Start -->
+    <!-- MENU START (Mặc định ẩn) -->
     <div id="start-menu" class="start-menu">
-        <h3>Windows 12 Search</h3>
-        <input type="text" placeholder="Hỏi AI hoặc tìm kiếm ứng dụng...">
-        <div class="apps-grid">
-            <div>🌐 Browser</div>
-            <div>📂 Files</div>
-            <div>⚙️ Settings</div>
+        <input type="text" placeholder="Type here to search..." class="start-search">
+        <div class="start-apps">
+            <div class="start-app-item" onclick="openWindow('notepad'); toggleStartMenu()"><img src="https://win11.blueedge.me/img/icon/win/notepad.png"> Notepad</div>
+            <div class="start-app-item" onclick="openWindow('this-pc'); toggleStartMenu()"><img src="https://win11.blueedge.me/img/icon/win/explorer.png"> Explorer</div>
         </div>
     </div>
 
