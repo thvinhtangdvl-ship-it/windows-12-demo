@@ -2,109 +2,249 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
 }
 
 body {
-    background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe') no-repeat center center/cover;
+    background: url('https://win11.blueedge.me/img/wallpaper/default/img0.jpg') no-repeat center center/cover;
     height: 100vh;
     overflow: hidden;
 }
 
-/* Taskbar kiểu Windows 12 (Floating Dock) */
+/* Màn hình desktop */
+.desktop {
+    width: 100%;
+    height: calc(100vh - 48px);
+    position: relative;
+    padding: 10px;
+}
+
+/* Icon ngoài màn hình */
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.icon span {
+    color: white;
+    font-size: 12px;
+    margin-top: 4px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* THANH TASKBAR PHÍA DƯỚI */
 .taskbar {
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: rgba(243, 243, 243, 0.85);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    z-index: 99999;
+}
+
+.taskbar-left {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
-.taskbar-center {
-    display: flex;
-    gap: 15px;
-}
-
-.taskbar-center img, .task-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 28px;
+.start-btn, .task-icon {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
     cursor: pointer;
-    transition: transform 0.2s;
+    border-radius: 4px;
 }
 
-.taskbar-center img:hover, .task-icon:hover {
-    transform: scale(1.15);
+.start-btn:hover, .task-icon:hover {
+    background: rgba(0, 0, 0, 0.05);
 }
 
-/* Menu Start */
-.start-menu {
-    position: absolute;
-    bottom: -500px; /* Ẩn dưới màn hình */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    height: 350px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    border-radius: 15px;
-    padding: 20px;
-    transition: bottom 0.3s ease-in-out;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+.taskbar-right {
+    font-size: 12px;
+    color: #333;
+    font-weight: 500;
 }
 
-.start-menu.active {
-    bottom: 80px; /* Đẩy lên khi mở */
-}
-
-.start-menu input {
-    width: 100%;
-    padding: 8px;
-    margin: 15px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-/* Cửa sổ ứng dụng */
+/* CỬA SỔ GIAO DIỆN (WINDOWS) */
 .window {
     position: absolute;
-    top: 20%;
-    left: 30%;
-    width: 400px;
-    height: 300px;
-    background: white;
+    top: 100px;
+    left: 150px;
+    width: 500px;
+    height: 350px;
+    background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    border: 1px solid rgba(0,0,0,0.15);
     display: none;
     flex-direction: column;
     overflow: hidden;
+    z-index: 10;
 }
 
 .window-header {
     background: #f3f3f3;
-    padding: 10px;
+    padding: 10px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: move; /* Tạo hiệu ứng bàn tay kéo */
 }
 
-.window-header button {
-    background: #ff5f56;
-    color: white;
-    border: none;
-    padding: 2px 8px;
-    border-radius: 4px;
+.window-header .title {
+    font-size: 13px;
+    color: #333;
+}
+
+.window-header .controls {
+    display: flex;
+    gap: 2px;
+}
+
+.window-header .controls span {
+    display: inline-block;
+    width: 30px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    font-size: 11px;
     cursor: pointer;
+    border-radius: 4px;
+}
+
+.window-header .controls span:hover {
+    background: rgba(0,0,0,0.08);
+}
+
+.window-header .controls .close:hover {
+    background: #e81123;
+    color: white;
 }
 
 .window-content {
-    padding: 15px;
     flex: 1;
+    position: relative;
+    background: #fff;
+}
+
+/* CSS riêng cho Notepad */
+textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* CSS riêng cho Explorer File */
+.folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 15px;
+}
+
+.folder-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.folder-item:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+/* MENU START */
+.start-menu {
+    position: fixed;
+    bottom: -500px;
+    left: 15px;
+    width: 320px;
+    height: 400px;
+    background: rgba(243, 243, 243, 0.92);
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.1);
+    transition: bottom 0.25s ease-out;
+    padding: 15px;
+    z-index: 99998;
+}
+
+.start-menu.active {
+    bottom: 58px;
+}
+
+.start-search {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.15);
+    outline: none;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.start-apps h4 {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.start-app-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.start-app-item:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.start-app-item img {
+    width: 20px;
+    height: 20px;
 }
