@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe') no-repeat center center/cover;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Taskbar kiểu Windows 12 (Floating Dock) */
+.taskbar {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+}
+
+.taskbar-center {
+    display: flex;
+    gap: 15px;
+}
+
+.taskbar-center img, .task-icon {
+    width: 35px;
+    height: 35px;
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.taskbar-center img:hover, .task-icon:hover {
+    transform: scale(1.15);
+}
+
+/* Menu Start */
+.start-menu {
+    position: absolute;
+    bottom: -500px; /* Ẩn dưới màn hình */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    padding: 20px;
+    transition: bottom 0.3s ease-in-out;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+.start-menu.active {
+    bottom: 80px; /* Đẩy lên khi mở */
+}
+
+.start-menu input {
+    width: 100%;
+    padding: 8px;
+    margin: 15px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+/* Cửa sổ ứng dụng */
+.window {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 400px;
+    height: 300px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.window-header {
+    background: #f3f3f3;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.window-header button {
+    background: #ff5f56;
+    color: white;
+    border: none;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.window-content {
+    padding: 15px;
+    flex: 1;
+}
