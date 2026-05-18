@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 12 Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Màn hình chính -->
+    <div class="desktop">
+        <!-- Widget hoặc Icon trên Desktop -->
+        <div class="desktop-icons">
+            <div class="icon" onclick="openApp('setting')">⚙️ <span>Settings</span></div>
+        </div>
+
+        <!-- Cửa sổ ứng dụng (Mặc định ẩn) -->
+        <div id="win-setting" class="window">
+            <div class="window-header">
+                <span>Settings</span>
+                <button onclick="closeApp('setting')">X</button>
+            </div>
+            <div class="window-content">
+                <p>Chào mừng bạn đến với Cài đặt Windows 12!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thanh Taskbar bo góc kiểu mới -->
+    <div class="taskbar">
+        <div class="taskbar-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" class="start-btn" onclick="toggleStart()">
+            <div class="task-icon">🌐</div>
+            <div class="task-icon">📂</div>
+        </div>
+    </div>
+
+    <!-- Menu Start -->
+    <div id="start-menu" class="start-menu">
+        <h3>Windows 12 Search</h3>
+        <input type="text" placeholder="Hỏi AI hoặc tìm kiếm ứng dụng...">
+        <div class="apps-grid">
+            <div>🌐 Browser</div>
+            <div>📂 Files</div>
+            <div>⚙️ Settings</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
