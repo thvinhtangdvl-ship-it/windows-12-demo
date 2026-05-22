@@ -3,101 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows 12 Web Demo</title>
+    <title>Windows 12 - Web Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="desktop">
+    <div id="boot-screen" class="screen active">
+        <div class="boot-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2012-%20%28Light_Blue%2C_RGB%29.svg" class="win-logo" alt="Windows 12">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <div id="lock-screen" class="screen" style="background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920') no-repeat center center/cover;">
+        <div class="lock-content" onclick="unlockSystem()">
+            <div class="time-display" id="lock-time">00:00</div>
+            <div class="date-display" id="lock-date">Thứ Hai, 1 tháng 1</div>
+            <p class="click-to-unlock">Nhấp chuột để mở khóa</p>
+        </div>
         
-        <div class="desktop-icons">
-            <div class="icon-item" onclick="openWindow('this-pc')">
-                <i class="fa-solid fa-desktop icon-display" style="color: #3b82f6;"></i>
+        <div class="login-card">
+            <div class="avatar-container">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h2>Scratcher_01</h2>
+            <div class="input-group">
+                <input type="password" id="password-input" placeholder="Mật khẩu (123456789m)" value="123456789m">
+                <button onclick="submitLogin()"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="desktop-screen" class="screen" style="background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920') no-repeat center center/cover;">
+        
+        <div class="desktop-shortcuts">
+            <div class="shortcut" onclick="openWindow('this-pc')">
+                <img src="https://win11.blueedge.me/img/icon/win/thispc.png" alt="This PC">
                 <span>This PC</span>
             </div>
-            <div class="icon-item" onclick="openWindow('notepad')">
-                <i class="fa-solid fa-file-lines icon-display" style="color: #f59e0b;"></i>
+            <div class="shortcut" onclick="openWindow('notepad')">
+                <img src="https://win11.blueedge.me/img/icon/win/notepad.png" alt="Notepad">
                 <span>Notepad</span>
             </div>
-            <div class="icon-item" onclick="openWindow('edge')">
-                <i class="fa-brands fa-edge icon-display" style="color: #10b981;"></i>
+            <div class="shortcut" onclick="openWindow('edge')">
+                <img src="https://win11.blueedge.me/img/icon/win/edge.png" alt="Edge">
                 <span>Edge Browser</span>
             </div>
         </div>
 
-        <div id="win-this-pc" class="window-os">
+        <div id="win-this-pc" class="window">
             <div class="window-header">
-                <div class="window-title"><i class="fa-solid fa-desktop"></i> This PC</div>
-                <div class="window-controls">
-                    <span class="ctrl-btn min">—</span>
-                    <span class="ctrl-btn max">🗖</span>
-                    <span class="ctrl-btn close" onclick="closeWindow('this-pc')">✕</span>
+                <div class="win-title"><img src="https://win11.blueedge.me/img/icon/win/thispc.png" width="16"> This PC</div>
+                <div class="win-controls">
+                    <span class="btn-minimize">—</span>
+                    <span class="btn-maximize">🗖</span>
+                    <span class="btn-close" onclick="closeWindow('this-pc')">✕</span>
                 </div>
             </div>
-            <div class="window-content folder-view">
-                <div class="folder-item"><i class="fa-solid fa-folder" style="color: #ecc94b;"></i> Documents</div>
-                <div class="folder-item"><i class="fa-solid fa-folder" style="color: #ecc94b;"></i> Downloads</div>
-                <div class="folder-item"><i class="fa-solid fa-hard-drive" style="color: #a0aec0;"></i> Local Disk (C:)</div>
+            <div class="window-body folder-grid">
+                <div class="grid-item"><i class="fa-solid fa-folder-open text-amber"></i><span>Documents</span></div>
+                <div class="grid-item"><i class="fa-solid fa-folder-arrow-down text-blue"></i><span>Downloads</span></div>
+                <div class="grid-item"><i class="fa-solid fa-compact-disc text-gray"></i><span>Ổ đĩa (C:)</span></div>
             </div>
         </div>
 
-        <div id="win-notepad" class="window-os">
+        <div id="win-notepad" class="window">
             <div class="window-header">
-                <div class="window-title"><i class="fa-solid fa-file-lines"></i> Notepad</div>
-                <div class="window-controls">
-                    <span class="ctrl-btn min">—</span>
-                    <span class="ctrl-btn max">🗖</span>
-                    <span class="ctrl-btn close" onclick="closeWindow('notepad')">✕</span>
+                <div class="win-title"><img src="https://win11.blueedge.me/img/icon/win/notepad.png" width="16"> Notepad</div>
+                <div class="win-controls">
+                    <span class="btn-minimize">—</span>
+                    <span class="btn-maximize">🗖</span>
+                    <span class="btn-close" onclick="closeWindow('notepad')">✕</span>
                 </div>
             </div>
-            <div class="window-content">
-                <textarea class="notepad-text" placeholder="Nhập ghi chú của bạn vào đây..."></textarea>
+            <div class="window-body" style="padding: 0;">
+                <textarea class="notepad-area" placeholder="Bắt đầu gõ nội dung của bạn..."></textarea>
             </div>
         </div>
 
-        <div id="win-edge" class="window-os" style="width: 700px; height: 450px;">
+        <div id="win-edge" class="window" style="width: 800px; height: 500px;">
             <div class="window-header">
-                <div class="window-title"><i class="fa-brands fa-edge"></i> Microsoft Edge</div>
-                <div class="window-controls">
-                    <span class="ctrl-btn min">—</span>
-                    <span class="ctrl-btn max">🗖</span>
-                    <span class="ctrl-btn close" onclick="closeWindow('edge')">✕</span>
+                <div class="win-title"><img src="https://win11.blueedge.me/img/icon/win/edge.png" width="16"> Microsoft Edge</div>
+                <div class="win-controls">
+                    <span class="btn-minimize">—</span>
+                    <span class="btn-maximize">🗖</span>
+                    <span class="btn-close" onclick="closeWindow('edge')">✕</span>
                 </div>
             </div>
-            <div class="window-content" style="padding: 0;">
-                <iframe src="https://www.bing.com" style="width: 100%; height: 100%; border: none;"></iframe>
+            <div class="window-body" style="padding: 0;">
+                <iframe src="https://www.bing.com" class="edge-frame"></iframe>
             </div>
         </div>
 
-    </div>
-
-    <div id="start-menu" class="start-menu-panel">
-        <input type="text" class="start-search" placeholder="Type here to search...">
-        <div class="pinned-apps-grid">
-            <div class="pinned-app" onclick="openWindow('edge'); toggleStartMenu()"><i class="fa-brands fa-edge"></i><span>Edge</span></div>
-            <div class="pinned-app" onclick="openWindow('notepad'); toggleStartMenu()"><i class="fa-solid fa-file-lines"></i><span>Notepad</span></div>
-            <div class="pinned-app" onclick="openWindow('this-pc'); toggleStartMenu()"><i class="fa-solid fa-desktop"></i><span>This PC</span></div>
-        </div>
-        <div class="start-footer">
-            <div class="user-profile"><i class="fa-solid fa-circle-user"></i> Scratcher_01</div>
-            <i class="fa-solid fa-power-off power-icon" onclick="alert('Đang tắt máy...')"></i>
-        </div>
-    </div>
-
-    <div class="taskbar-wrapper">
-        <div class="taskbar-dock">
-            <div class="taskbar-icon start-trigger" onclick="toggleStartMenu()">
-                <i class="fa-brands fa-microsoft"></i>
+        <div id="start-menu" class="start-panel">
+            <input type="text" class="search-bar" placeholder="Nhập để tìm kiếm ứng dụng...">
+            <div class="apps-section">
+                <p class="section-label">Ứng dụng đã ghim</p>
+                <div class="apps-grid">
+                    <div class="app-item" onclick="openWindow('edge'); toggleStart()"><img src="https://win11.blueedge.me/img/icon/win/edge.png"><span>Edge</span></div>
+                    <div class="app-item" onclick="openWindow('notepad'); toggleStart()"><img src="https://win11.blueedge.me/img/icon/win/notepad.png"><span>Notepad</span></div>
+                    <div class="app-item" onclick="openWindow('this-pc'); toggleStart()"><img src="https://win11.blueedge.me/img/icon/win/thispc.png"><span>This PC</span></div>
+                </div>
             </div>
-            <div class="taskbar-icon" onclick="openWindow('this-pc')"><i class="fa-solid fa-desktop" style="color: #2b6cb0;"></i></div>
-            <div class="taskbar-icon" onclick="openWindow('notepad')"><i class="fa-solid fa-file-lines" style="color: #dd6b20;"></i></div>
-            <div class="taskbar-icon" onclick="openWindow('edge')"><i class="fa-brands fa-edge" style="color: #319795;"></i></div>
-            
-            <div class="taskbar-separator"></div>
-            
-            <div class="taskbar-clock" id="live-clock">12:00 PM</div>
+            <div class="start-footer">
+                <div class="user-info"><i class="fa-solid fa-circle-user"></i> Scratcher_01</div>
+                <i class="fa-solid fa-power-off power-btn" onclick="location.reload()"></i>
+            </div>
         </div>
+
+        <div class="taskbar-container">
+            <div class="taskbar-dock">
+                <div class="tb-icon" onclick="toggleStart()"><img src="https://win11.blueedge.me/img/icon/win/start.png" class="start-logo"></div>
+                <div class="tb-icon" onclick="openWindow('this-pc')"><img src="https://win11.blueedge.me/img/icon/win/thispc.png"></div>
+                <div class="tb-icon" onclick="openWindow('notepad')"><img src="https://win11.blueedge.me/img/icon/win/notepad.png"></div>
+                <div class="tb-icon" onclick="openWindow('edge')"><img src="https://win11.blueedge.me/img/icon/win/edge.png"></div>
+                <div class="tb-divider"></div>
+                <div class="tb-clock" id="desktop-clock">00:00 PM</div>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
